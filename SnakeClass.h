@@ -20,7 +20,9 @@ public:
     Snake();
     ~Snake();
 private:
+    int cur_x = 0, cur_y = 0;
     sf::CircleShape *head;
+    sf::CircleShape *head1;
     Direction dir;
     float vec_x, vec_y;
     void set_direction();
