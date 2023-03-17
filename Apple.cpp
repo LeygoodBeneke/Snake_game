@@ -13,11 +13,12 @@ bool Apple:: is_eaten(sf:: Vector2f head_pos) {
            int(head_pos.y) == int(apple.getPosition().y);
 }
 
-void Apple:: logic(sf::Vector2f head_pos) {
+void Apple:: logic(sf::Vector2f head_pos, Snake& snake) {
     if (is_eaten(head_pos)) {
         int new_x = rand() % 50 * 20;
         int new_y = rand() % 50 * 10;
         apple.setPosition(new_x, new_y);
+        snake.add_body();
     }
 }
 

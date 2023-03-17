@@ -4,16 +4,21 @@
 #define RADIUS 10
 
 void Snake:: draw(sf:: RenderWindow &window) {
-    for (int i = 0; i < INIT_SIZE; i++) window.draw(head[i]);
-    //window.draw(*head1);
+    for (int i = 0; i < head.size(); i++) window.draw(head[i]);
 }
 
-void Snake:: init_head(std:: vector<sf::CircleShape>& h, std:: vector<sf::Vector2f>& cc) {
+void Snake:: add_body() {
+    head.push_back(sf::CircleShape(RADIUS));
+    head.back().setFillColor(sf::Color::Green);
+    cur_coords.push_back(sf::Vector2f(0.0f, 0.0f));
+    if (head.size() < 2) head.back().setPosition(80.0f, 100.0f);
+    else head.back().setPosition(head[head.size() - 2].getPosition().x, head[head.size() - 2].getPosition().y);
+
+}
+
+void Snake:: init_head() {
     for (int i = 0; i < INIT_SIZE; i++) {
-        h.push_back(sf::CircleShape(RADIUS));
-        h.back().setFillColor(sf::Color::Green);
-        h.back().move(80.0f + 20.0f * (i != 0), 100.0f);
-        cc.push_back(sf::Vector2f(0.0f, 0.0f));
+        add_body();
     }
 }
 
@@ -21,11 +26,7 @@ Snake:: Snake() {
     vec_x = 1.0f;
     vec_y = 0.00f;
     dir = DEFAULT;
-    init_head(head, cur_coords);
-    head1 = new sf::CircleShape(RADIUS);
-    head1->setFillColor(sf::Color::Green);
-    cur_coords.push_back(sf::Vector2f(0.0f, 0.0f));
-    cur_coords.push_back(sf::Vector2f(0.0f, 0.0f));
+    init_head();
 }
 
 void Snake:: logic(sf:: RenderWindow &window) {
@@ -35,12 +36,12 @@ void Snake:: logic(sf:: RenderWindow &window) {
         set_direction();
         cur_x = head[0].getPosition().x, cur_y = head[0].getPosition().y;
 
-        for (int i = 0; i < INIT_SIZE; i++) {
+        for (int i = 0; i < head.size(); i++) {
             cur_coords[i] = head[i].getPosition();
         }
     }
     head[0].move(vec_x, vec_y);
-    for (int i = 1; i < INIT_SIZE; i++) {
+    for (int i = 1; i < head.size(); i++) {
         if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(1.f, 0);
         else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, 1.f);
         else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-1.f, 0);
@@ -49,7 +50,6 @@ void Snake:: logic(sf:: RenderWindow &window) {
 }
 
 Snake:: ~Snake() {
-    delete head1;
 }
 
 

@@ -1,4 +1,3 @@
-#include "SnakeClass.h"
 #include "Apple.h"
 
 void event_logic(sf::RenderWindow &window) {
@@ -14,10 +13,6 @@ void game() {
     Snake s;
     Apple a;
 
-//    sf::CircleShape apple(RADIUS);
-//    apple.setFillColor(sf::Color::Red);
-//    apple.setPosition(40, 60);
-
     sf::Clock clock;
     window.setFramerateLimit(60);
 
@@ -29,7 +24,7 @@ void game() {
         event_logic(window);
         window.clear();
         s.logic(window);
-        a.logic(s.get_head_pos());
+        a.logic(s.get_head_pos(), s);
         a.draw(window);
 
  //       window.draw(apple);
