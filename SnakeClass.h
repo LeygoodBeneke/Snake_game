@@ -20,7 +20,6 @@ public:
     Snake();
     ~Snake();
 private:
-    int cur_x = 0, cur_y = 0;
     std:: vector<sf::CircleShape> head;
     std:: vector<sf::Vector2f> cur_coords;
     Direction dir;

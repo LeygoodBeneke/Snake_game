@@ -9,12 +9,14 @@ void event_logic(sf::RenderWindow &window) {
 }
 
 void game() {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    Snake s;
-    Apple a;
+    sf::RenderWindow window(sf::VideoMode(1000, 800), "SFML works!");
+    Snake snake;
+    Apple apple;
+    Score score;
+
 
     sf::Clock clock;
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(60.0f);
 
     while (window.isOpen()) {
 
@@ -23,11 +25,12 @@ void game() {
         std:: cout << "fps: " << fps << '\n';
         event_logic(window);
         window.clear();
-        s.logic(window);
-        a.logic(s.get_head_pos(), s);
-        a.draw(window);
+        snake.logic(window);
+        apple.logic(snake, score);
+        apple.draw(window);
 
  //       window.draw(apple);
+        score.draw(window);
         window.display();
     }
 }

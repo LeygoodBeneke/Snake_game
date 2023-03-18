@@ -1,7 +1,8 @@
 #include "SnakeClass.h"
 
-#define INIT_SIZE 5
+#define INIT_SIZE 1
 #define RADIUS 10
+#define SPEED 2.0f
 
 void Snake:: draw(sf:: RenderWindow &window) {
     for (int i = 0; i < head.size(); i++) window.draw(head[i]);
@@ -23,7 +24,7 @@ void Snake:: init_head() {
 }
 
 Snake:: Snake() {
-    vec_x = 1.0f;
+    vec_x = SPEED;
     vec_y = 0.00f;
     dir = DEFAULT;
     init_head();
@@ -34,41 +35,38 @@ void Snake:: logic(sf:: RenderWindow &window) {
     dir = check_keyboard_key();
     if (is_int_coords()) {
         set_direction();
-        cur_x = head[0].getPosition().x, cur_y = head[0].getPosition().y;
-
         for (int i = 0; i < head.size(); i++) {
             cur_coords[i] = head[i].getPosition();
         }
     }
     head[0].move(vec_x, vec_y);
     for (int i = 1; i < head.size(); i++) {
-        if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(1.f, 0);
-        else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, 1.f);
-        else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-1.f, 0);
-        else if (int(cur_coords[i - 1].y) < int(head[i].getPosition().y)) head[i].move(0, -1.f);
+        if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(SPEED, 0);
+        else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, SPEED);
+        else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-SPEED, 0);
+        else if (int(cur_coords[i - 1].y) < int(head[i].getPosition().y)) head[i].move(0, -SPEED);
     }
 }
 
-Snake:: ~Snake() {
-}
+Snake:: ~Snake() {}
 
 
 void Snake:: set_direction() {
     if (dir == Direction::UP) {
-        vec_y = -1.f;
+        vec_y = -SPEED;
         vec_x = 0.00f;
     }
     if (dir == Direction::DOWN) {
-        vec_y = 1.f;
+        vec_y = SPEED;
         vec_x = 0.00f;
     }
     if (dir == Direction::LEFT) {
         vec_y = 0.00f;
-        vec_x = -1.f;
+        vec_x = -SPEED;
     }
     if (dir == Direction::RIGHT) {
         vec_y = 0.00f;
-        vec_x = 1.f;
+        vec_x = SPEED;
     }
 }
 
