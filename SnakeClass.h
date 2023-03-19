@@ -1,7 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <bits/stdc++.h>
+#include "Score.h"
 
 enum Direction {
     LEFT,
@@ -14,7 +11,7 @@ enum Direction {
 class Snake {
 public:
     void draw(sf:: RenderWindow &window);
-    void logic(sf:: RenderWindow &window);
+    void logic(sf:: RenderWindow &window, Score &score);
     sf:: Vector2f get_head_pos();
     void add_body();
     Snake();

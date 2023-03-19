@@ -1,6 +1,3 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/System/Vector2.hpp>
 #include "Apple.h"
 
 
@@ -23,8 +20,7 @@ void Apple:: logic(Snake& snake, Score& score) {
     }
 }
 
-Apple:: Apple() {
-    apple = sf::CircleShape(RADIUS);
+Apple:: Apple() : apple(RADIUS) {
     apple.setFillColor(sf::Color::Red);
     apple.setPosition(40, 60);
 }

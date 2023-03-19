@@ -1,8 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/System/Vector2.hpp>
 #include "SnakeClass.h"
-#include "Score.h"
 
 #define RADIUS 10
 

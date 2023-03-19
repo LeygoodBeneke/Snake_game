@@ -5,7 +5,7 @@
 #define SPEED 2.0f
 
 void Snake:: draw(sf:: RenderWindow &window) {
-    for (int i = 0; i < head.size(); i++) window.draw(head[i]);
+    for (size_t i = 0; i < head.size(); i++) window.draw(head[i]);
 }
 
 void Snake:: add_body() {
@@ -30,17 +30,25 @@ Snake:: Snake() {
     init_head();
 }
 
-void Snake:: logic(sf:: RenderWindow &window) {
+void Snake:: logic(sf:: RenderWindow &window, Score &score) {
     draw(window);
     dir = check_keyboard_key();
     if (is_int_coords()) {
         set_direction();
-        for (int i = 0; i < head.size(); i++) {
+        for (size_t i = 0; i < head.size(); i++) {
             cur_coords[i] = head[i].getPosition();
+        }
+        for (size_t i = 1; i < head.size(); i++) {
+            if (head[0].getPosition() == head[i].getPosition()) {
+                head.resize(i + 1);
+                cur_coords.resize(i + 1);
+                score.set_score(i + 1);
+                break;
+            }
         }
     }
     head[0].move(vec_x, vec_y);
-    for (int i = 1; i < head.size(); i++) {
+    for (size_t i = 1; i < head.size(); i++) {
         if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(SPEED, 0);
         else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, SPEED);
         else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-SPEED, 0);

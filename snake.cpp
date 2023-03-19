@@ -25,7 +25,7 @@ void game() {
         std:: cout << "fps: " << fps << '\n';
         event_logic(window);
         window.clear();
-        snake.logic(window);
+        snake.logic(window, score);
         apple.logic(snake, score);
         apple.draw(window);
 

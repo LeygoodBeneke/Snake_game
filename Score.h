@@ -12,8 +12,7 @@ public:
         window.draw(text);
     }
 
-    Score() {
-        font = sf:: Font();
+    Score() : font() {
         font.loadFromFile("fonts/Hack-Regular.ttf");
         text = sf:: Text("Scroe: ", font, 22);
         text.setPosition(30, 30);
@@ -21,6 +20,7 @@ public:
     }
 
     void inc_score() { score++; }
+    void set_score(int new_score) { score = new_score; }
 
 
 private:
