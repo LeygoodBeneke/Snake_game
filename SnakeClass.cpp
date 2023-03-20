@@ -18,9 +18,8 @@ void Snake:: add_body() {
 }
 
 void Snake:: init_head() {
-    for (int i = 0; i < INIT_SIZE; i++) {
+    for (int i = 0; i < INIT_SIZE; i++)
         add_body();
-    }
 }
 
 Snake:: Snake() {
@@ -30,23 +29,8 @@ Snake:: Snake() {
     init_head();
 }
 
-void Snake:: logic(sf:: RenderWindow &window, Score &score) {
-    draw(window);
-    dir = check_keyboard_key();
-    if (is_int_coords()) {
-        set_direction();
-        for (size_t i = 0; i < head.size(); i++) {
-            cur_coords[i] = head[i].getPosition();
-        }
-        for (size_t i = 1; i < head.size(); i++) {
-            if (head[0].getPosition() == head[i].getPosition()) {
-                head.resize(i + 1);
-                cur_coords.resize(i + 1);
-                score.set_score(i + 1);
-                break;
-            }
-        }
-    }
+
+void Snake:: movement() {
     head[0].move(vec_x, vec_y);
     for (size_t i = 1; i < head.size(); i++) {
         if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(SPEED, 0);
@@ -56,25 +40,44 @@ void Snake:: logic(sf:: RenderWindow &window, Score &score) {
     }
 }
 
+void Snake:: update_cur_coords() {
+    for (size_t i = 0; i < head.size(); i++)
+        cur_coords[i] = head[i].getPosition();
+}
+
+void Snake:: collision(Score &score) {
+    for (size_t i = 1; i < head.size(); i++) {
+        if (head[0].getPosition() == head[i].getPosition()) {
+            head.resize(i + 1);
+            cur_coords.resize(i + 1);
+            score.set_score(i + 1);
+            break;
+        }
+    }
+}
+
+void Snake:: logic(sf:: RenderWindow &window, Score &score) {
+    draw(window);
+    dir = check_keyboard_key();
+    if (is_int_coords()) {
+        set_direction();
+        update_cur_coords();
+        collision(score);
+    }
+    movement();
+}
+
 Snake:: ~Snake() {}
 
 
 void Snake:: set_direction() {
-    if (dir == Direction::UP) {
-        vec_y = -SPEED;
+    if (dir == Direction::UP || dir == Direction::DOWN) {
+        vec_y = SPEED * (dir == Direction::UP ? -1 : 1);
         vec_x = 0.00f;
     }
-    if (dir == Direction::DOWN) {
-        vec_y = SPEED;
-        vec_x = 0.00f;
-    }
-    if (dir == Direction::LEFT) {
+    if (dir == Direction::LEFT || dir == Direction::RIGHT) {
         vec_y = 0.00f;
-        vec_x = -SPEED;
-    }
-    if (dir == Direction::RIGHT) {
-        vec_y = 0.00f;
-        vec_x = SPEED;
+        vec_x = SPEED * (dir == Direction::LEFT ? -1 : 1);
     }
 }
 

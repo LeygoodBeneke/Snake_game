@@ -16,7 +16,7 @@ void game() {
 
 
     sf::Clock clock;
-    window.setFramerateLimit(60.0f);
+    window.setFramerateLimit(60);
 
     while (window.isOpen()) {
 
@@ -29,7 +29,6 @@ void game() {
         apple.logic(snake, score);
         apple.draw(window);
 
- //       window.draw(apple);
         score.draw(window);
         window.display();
     }

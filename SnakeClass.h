@@ -25,4 +25,7 @@ private:
     bool is_int_coords();
     enum Direction check_keyboard_key();
     void init_head();
+    void movement();
+    void update_cur_coords();
+    void collision(Score &score);
 };
