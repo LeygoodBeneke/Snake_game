@@ -12,15 +12,15 @@ bool Apple:: is_eaten(sf:: Vector2f head_pos) {
 
 void Apple:: logic(Snake& snake, Score& score) {
     if (is_eaten(snake.get_head_pos())) {
-        int new_x = rand() % 40 * 20;
-        int new_y = rand() % 20 * 20;
+        int new_x = rand() % (height / 20 - 2) * 20 + 20;
+        int new_y = rand() % (width / 20 - 4) * 20 + 60;
         apple.setPosition(new_x, new_y);
         snake.add_body();
         score.inc_score();
     }
 }
 
-Apple:: Apple() : apple(RADIUS) {
+Apple:: Apple(int h, int w) : apple(RADIUS), height(h), width(w) {
     apple.setFillColor(sf::Color::Red);
     apple.setPosition(40, 60);
 }

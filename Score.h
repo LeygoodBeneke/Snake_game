@@ -12,10 +12,10 @@ public:
         window.draw(text);
     }
 
-    Score() : font() {
+    Score(int height, int width) : font() {
         font.loadFromFile("fonts/Hack-Regular.ttf");
         text = sf:: Text("Scroe: ", font, 22);
-        text.setPosition(30, 30);
+        text.setPosition(height / 2.0f - 40, width * 0 + 5);
         score = 0;
     }
 

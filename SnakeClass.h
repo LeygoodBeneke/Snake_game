@@ -14,7 +14,7 @@ public:
     void logic(sf:: RenderWindow &window, Score &score);
     sf:: Vector2f get_head_pos();
     void add_body();
-    Snake();
+    Snake(int h, int w);
     ~Snake();
 private:
     std:: vector<sf::CircleShape> head;
@@ -28,4 +28,5 @@ private:
     void movement();
     void update_cur_coords();
     void collision(Score &score);
+    int height, width;
 };

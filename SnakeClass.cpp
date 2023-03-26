@@ -14,7 +14,6 @@ void Snake:: add_body() {
     cur_coords.push_back(sf::Vector2f(0.0f, 0.0f));
     if (head.size() < 2) head.back().setPosition(80.0f, 100.0f);
     else head.back().setPosition(head[head.size() - 2].getPosition().x, head[head.size() - 2].getPosition().y);
-
 }
 
 void Snake:: init_head() {
@@ -22,7 +21,7 @@ void Snake:: init_head() {
         add_body();
 }
 
-Snake:: Snake() {
+Snake:: Snake(int h, int w) : height(h), width(w) {
     vec_x = SPEED;
     vec_y = 0.00f;
     dir = DEFAULT;
@@ -32,11 +31,15 @@ Snake:: Snake() {
 
 void Snake:: movement() {
     head[0].move(vec_x, vec_y);
+    if (head[0].getPosition().y < 60 && vec_y < 0) head[0].move(0, width - RADIUS * 2 - 60);
+    if (head[0].getPosition().y > width - 40) head[0].setPosition(head[0].getPosition().x, 40);
     for (size_t i = 1; i < head.size(); i++) {
         if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(SPEED, 0);
-        else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, SPEED);
         else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-SPEED, 0);
+        else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, SPEED);
         else if (int(cur_coords[i - 1].y) < int(head[i].getPosition().y)) head[i].move(0, -SPEED);
+
+        if (std:: fabs(cur_coords[i - 1].y - head[i].getPosition().y) >= 40) head[i].move(0, cur_coords[i - 1].y - 50);
     }
 }
 
@@ -100,5 +103,5 @@ enum Direction Snake:: check_keyboard_key() {
 }
 
 sf:: Vector2f Snake:: get_head_pos() {
-    return head[0].getPosition();
+    return head.front().getPosition();
 }
