@@ -1,15 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
+#include "../Map.h"
+#include "../Apple.h"
 
-class MainScene {
+class GameScene {
 public:
     void drawScene();
-    bool logic();
-    MainScene(int h, int w, sf::RenderWindow& win);
+    void logic();
+    GameScene(int h, int w, sf::RenderWindow& win);
 
 private:
     int height, width;
     sf::RenderWindow &window;
-    sf::RectangleShape play_button;
+    Snake snake;
+    Apple apple;
+    Score score;
+    Map map;
 };

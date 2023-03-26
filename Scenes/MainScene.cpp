@@ -1,7 +1,7 @@
 #include "MainScene.h"
 #include <SFML/System/Vector2.hpp>
 
-void MainScene:: drawScene(sf::RenderWindow& window) {
+void MainScene:: drawScene() {
     window.draw(play_button);
 }
 

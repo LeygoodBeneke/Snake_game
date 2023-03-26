@@ -1,6 +1,5 @@
-#include "Map.h"
-#include "Apple.h"
 #include "Scenes/MainScene.h"
+#include "Scenes/GameScene.h"
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -23,13 +22,8 @@ void game() {
     int h = 1280, w = 720;
     sf::RenderWindow window(sf::VideoMode(h, w), "Snake");
     window.setVerticalSyncEnabled(true);
-    Snake snake(h, w);
-    Apple apple(h, w);
-    Score score(h, w);
-    Map map(h / 20, w / 20 - 2);
-
+    GameScene game_scene(h, w, window);
     MainScene ms(h, w, window);
-    map.init();
 
     sf::Clock clock;
     bool flag = false;
@@ -38,14 +32,9 @@ void game() {
         show_fps(clock);
         event_logic(window);
         if (flag) {
-            snake.logic(window, score);
-            apple.logic(snake, score);
-
-            score.draw(window);
-            map.draw(window);
-            apple.draw(window);
+            game_scene.logic();
         } else {
-            ms.drawScene(window);
+            ms.drawScene();
             flag = ms.logic();
         }
         window.display();
