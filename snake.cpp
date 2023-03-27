@@ -19,7 +19,7 @@ void show_fps(sf:: Clock& clock) {
 }
 
 void game() {
-    int h = 1280, w = 720;
+    int h = 1920, w = 1080;
     sf::RenderWindow window(sf::VideoMode(h, w), "Snake");
     window.setVerticalSyncEnabled(true);
     GameScene game_scene(h, w, window);
@@ -29,7 +29,7 @@ void game() {
     bool flag = false;
 
     while (window.isOpen()) {
-        show_fps(clock);
+        //show_fps(clock);
         event_logic(window);
         if (flag) {
             game_scene.logic();

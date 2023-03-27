@@ -1,4 +1,7 @@
+EXECFILE=snake.out
+CFLAGS=-Wall -Werror -Wextra
+
 build:
-	g++ -Wall -Werror -Wextra *.cpp Scenes/*.cpp -o snake.exe -lsfml-graphics -lsfml-window -lsfml-system
+	g++ *.cpp Scenes/*.cpp -o $(EXECFILE) -lsfml-graphics -lsfml-window -lsfml-system
 run:
-	./snake.out
+	./$(EXECFILE)

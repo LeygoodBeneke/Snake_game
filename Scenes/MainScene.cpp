@@ -3,6 +3,7 @@
 
 void MainScene:: drawScene() {
     window.draw(play_button);
+    button.draw();
 }
 
 bool MainScene:: logic() {
@@ -22,8 +23,10 @@ bool MainScene:: logic() {
 }
 
 
-MainScene:: MainScene(int h, int w, sf::RenderWindow& win) : height(h), width(w), window(win), play_button(sf::Vector2f(0, 0)) {
+MainScene:: MainScene(int h, int w, sf::RenderWindow& win) : height(h), width(w), window(win), play_button(sf::Vector2f(0, 0)), button(win)  {
     play_button.setSize(sf::Vector2f(height / 4.0f, width / 10.0f));
     play_button.setPosition(height / 2.0f - play_button.getSize().x / 2, width / 2.0f - play_button.getSize().y / 2);
     play_button.setFillColor(sf::Color::Cyan);
+
+    button.setUp(sf:: Vector2f(100, 100), sf:: Vector2f(100, 100), "HELLO");
 }

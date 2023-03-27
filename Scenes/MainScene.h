@@ -2,6 +2,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "../templates/Button.h"
+
 class MainScene {
 public:
     void drawScene();
@@ -12,4 +14,5 @@ private:
     int height, width;
     sf::RenderWindow &window;
     sf::RectangleShape play_button;
+    Button button;
 };

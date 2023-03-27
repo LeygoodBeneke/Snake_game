@@ -9,13 +9,14 @@ public:
         std::stringstream stream;
         stream << "Score: " << score;
         text.setString(stream.str());
+        text.setPosition(height / 2.0f - text.getString().getSize() * 22 / 3.0, width * 0 + 5);
         window.draw(text);
     }
 
-    Score(int height, int width) : font() {
+    Score(int h, int w) : font(), height(h), width(w) {
         font.loadFromFile("fonts/Hack-Regular.ttf");
         text = sf:: Text("Scroe: ", font, 22);
-        text.setPosition(height / 2.0f - 40, width * 0 + 5);
+        text.setPosition(height / 2.0f - text.getString().getSize() * 22 / 3.0, width * 0 + 5);
         score = 0;
     }
 
@@ -26,5 +27,5 @@ public:
 private:
     sf::Text text;
     sf::Font font;
-    int score;
+    int score, height, width;
 };
