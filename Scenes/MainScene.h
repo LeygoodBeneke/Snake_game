@@ -13,6 +13,5 @@ public:
 private:
     int height, width;
     sf::RenderWindow &window;
-    sf::RectangleShape play_button;
-    Button button;
+    Button play_button, exit_button;
 };
