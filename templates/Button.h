@@ -12,8 +12,8 @@ public:
 
     Button(sf::RenderWindow& win) : window(win) {}
 
-    void setUp(sf::Vector2f pos) {
-        texture.loadFromFile("Images/PlayButton.png");
+    void setUp(sf::Vector2f pos, std::string filename) {
+        texture.loadFromFile(filename);
         sprite.setTexture(texture);
         sprite.setPosition(pos);
     }
@@ -31,8 +31,8 @@ private:
     void hover() {
         if (sprite.getPosition().x <= sf::Mouse::getPosition(window).x && sf::Mouse::getPosition(window).x <= sprite.getPosition().x + sprite.getGlobalBounds().width &&
             sprite.getPosition().y <= sf::Mouse::getPosition(window).y && sf::Mouse::getPosition(window).y <= sprite.getPosition().y + sprite.getGlobalBounds().height) {
-            sprite.setColor(sf::Color::Blue);
-        } else sprite.setColor(sf::Color::White);
+            sprite.setColor(sf::Color(189, 147, 249));
+        } else sprite.setColor(sf::Color(248, 248, 242));
     }
 
     sf::RenderWindow &window;
