@@ -1,10 +1,11 @@
 #include "SnakeClass.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #define INIT_SIZE 1
 #define RADIUS 10
 #define SPEED 2.0f
 
-void Snake:: draw(sf:: RenderWindow &window) {
+void Snake:: draw() {
     for (size_t i = 0; i < head.size(); i++) window.draw(head[i]);
 }
 
@@ -21,7 +22,7 @@ void Snake:: init_head() {
         add_body();
 }
 
-Snake:: Snake(int h, int w) : height(h), width(w) {
+Snake:: Snake(int h, int w, sf::RenderWindow& win) : height(h), width(w), window(win) {
     vec_x = SPEED;
     vec_y = 0.00f;
     dir = DEFAULT;
@@ -59,8 +60,7 @@ void Snake:: collision(Score &score) {
     }
 }
 
-void Snake:: logic(sf:: RenderWindow &window, Score &score) {
-    draw(window);
+void Snake:: logic(Score &score) {
     dir = check_keyboard_key();
     if (is_int_coords()) {
         set_direction();

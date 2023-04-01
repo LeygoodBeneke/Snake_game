@@ -17,4 +17,5 @@ private:
     Apple apple;
     Score score;
     Map map;
+    bool isPaused = false;
 };

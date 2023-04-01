@@ -1,4 +1,5 @@
 #include "Score.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 enum Direction {
     LEFT,
@@ -10,11 +11,11 @@ enum Direction {
 
 class Snake {
 public:
-    void draw(sf:: RenderWindow &window);
-    void logic(sf:: RenderWindow &window, Score &score);
+    void draw();
+    void logic(Score &score);
     sf:: Vector2f get_head_pos();
     void add_body();
-    Snake(int h, int w);
+    Snake(int h, int w, sf::RenderWindow& win);
     ~Snake();
 private:
     std:: vector<sf::CircleShape> head;
@@ -29,4 +30,5 @@ private:
     void update_cur_coords();
     void collision(Score &score);
     int height, width;
+    sf::RenderWindow& window;
 };
