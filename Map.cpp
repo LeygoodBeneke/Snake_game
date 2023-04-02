@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#define RADIUS 20
 
 Map:: Map(int n, int m) : map(n, std:: vector<int>(m)) {}
 
@@ -20,9 +20,9 @@ void Map:: draw(sf:: RenderWindow &window) {
         for (size_t j = 0; j < map[i].size(); j++) {
             if (map[i][j] == 1) {
                 sf::RectangleShape rect;
-                sf::Vector2f vec = {20.f, 20.f};
+                sf::Vector2f vec = {RADIUS * 2, RADIUS * 2};
                 rect.setSize(vec);
-                rect.move(i * 20, j * 20 + 40);
+                rect.move(i * (RADIUS * 2), j * (RADIUS * 2) + 4 * (RADIUS));
                 window.draw(rect);
             }
         }

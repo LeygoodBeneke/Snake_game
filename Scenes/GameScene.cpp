@@ -23,7 +23,7 @@ void GameScene:: logic() {
 }
 
 GameScene:: GameScene(int h, int w, sf::RenderWindow& win) 
-    : height(h), width(w), window(win), snake(h, w, win), apple(h, w), score(h, w), map(h / 20, w / 20 - 2) {
+    : height(h), width(w), window(win), snake(h, w, win), apple(h, w), score(h, w), map(h / (RADIUS * 2), w / (RADIUS * 2) - 2) {
         map.init();
     }
 

@@ -1,6 +1,6 @@
 #include "SnakeClass.h"
 
-#define RADIUS 10
+#define RADIUS 20
 
 class Apple {
 public:

@@ -2,6 +2,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <bits/stdc++.h>
+#define RADIUS 20
 
 class Score {
 public:

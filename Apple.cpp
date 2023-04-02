@@ -12,8 +12,8 @@ bool Apple:: is_eaten(sf:: Vector2f head_pos) {
 
 void Apple:: logic(Snake& snake, Score& score) {
     if (is_eaten(snake.get_head_pos())) {
-        int new_x = rand() % (height / 20 - 2) * 20 + 20;
-        int new_y = rand() % (width / 20 - 4) * 20 + 60;
+        int new_x = rand() % (height / (2 * RADIUS) - 2) * (2 * RADIUS) + RADIUS * 2;
+        int new_y = rand() % (width / (2 * RADIUS) - 4) * (2 * RADIUS) + RADIUS * 6;
         apple.setPosition(new_x, new_y);
         snake.add_body();
         score.inc_score();
@@ -22,6 +22,6 @@ void Apple:: logic(Snake& snake, Score& score) {
 
 Apple:: Apple(int h, int w) : apple(RADIUS), height(h), width(w) {
     apple.setFillColor(sf::Color::Red);
-    apple.setPosition(40, 60);
+    apple.setPosition(4 * RADIUS, 6 * RADIUS);
 }
 

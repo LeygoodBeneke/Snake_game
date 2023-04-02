@@ -2,9 +2,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#define INIT_SIZE 1
-#define RADIUS 10
-#define SPEED 2.0f
+#define INIT_SIZE 10
+#define SPEED 10.0f
 
 void Snake:: draw() {
     for (size_t i = 0; i < head.size(); i++) window.draw(head[i]);
@@ -14,7 +13,7 @@ void Snake:: add_body() {
     head.push_back(sf::CircleShape(RADIUS));
     head.back().setFillColor(sf::Color::Green);
     cur_coords.push_back(sf::Vector2f(0.0f, 0.0f));
-    if (head.size() < 2) head.back().setPosition(80.0f, 100.0f);
+    if (head.size() < 2) head.back().setPosition(RADIUS * 8, RADIUS * 10);
     else head.back().setPosition(head[head.size() - 2].getPosition().x, head[head.size() - 2].getPosition().y);
 }
 
@@ -36,7 +35,6 @@ float Snake:: get_motion_value(int left, int right) {
     return -SPEED;
 }
 
-
 sf::Vector2f Snake:: get_motion_vector(size_t idx) {
     float move_x = get_motion_value(cur_coords[idx - 1].x, head[idx].getPosition().x);
     float move_y = get_motion_value(cur_coords[idx - 1].y, head[idx].getPosition().y);
@@ -44,17 +42,17 @@ sf::Vector2f Snake:: get_motion_vector(size_t idx) {
 }
 
 void Snake:: check_head_position() {
-    if (head[0].getPosition().y < 40 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, width - RADIUS * 2 - 20);
-    if (head[0].getPosition().y > width - 20 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, 40);
+    if (head[0].getPosition().y < RADIUS * 4 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, width - RADIUS * 4);
+    if (head[0].getPosition().y > width - RADIUS * 2 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, RADIUS * 4);
     if (head[0].getPosition().x < 0 && vec_x < 0) head[0].setPosition(height - RADIUS, head[0].getPosition().y);
-    if (head[0].getPosition().x > height - 20 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
+    if (head[0].getPosition().x > height - RADIUS * 2 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
 }
 
 void Snake:: body_movement(int idx) {
     head[idx].move(get_motion_vector(idx));
-    if (std:: fabs(cur_coords[idx - 1].y - head[idx].getPosition().y) > 20 &&
+    if (std:: fabs(cur_coords[idx - 1].y - head[idx].getPosition().y) > RADIUS * 2 &&
         head[idx].getPosition().y) head[idx].setPosition(head[idx].getPosition().x, cur_coords[idx - 1].y);
-    if (std:: fabs(cur_coords[idx - 1].x - head[idx].getPosition().x) > 20 &&
+    if (std:: fabs(cur_coords[idx - 1].x - head[idx].getPosition().x) > RADIUS * 2 &&
         head[idx].getPosition().x) head[idx].setPosition(cur_coords[idx - 1].x, head[idx].getPosition().y);
 }
 
