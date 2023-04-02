@@ -18,10 +18,6 @@ public:
     Snake(int h, int w, sf::RenderWindow& win);
     ~Snake();
 private:
-    std:: vector<sf::CircleShape> head;
-    std:: vector<sf::Vector2f> cur_coords;
-    Direction dir;
-    float vec_x, vec_y;
     void set_direction();
     bool is_int_coords();
     enum Direction check_keyboard_key();
@@ -29,7 +25,13 @@ private:
     void movement();
     void update_cur_coords();
     void collision(Score &score);
-    float get_motion(int left, int right);
+    float get_motion_value(int left, int right);
+    sf::Vector2f get_motion_vector(size_t idx);
+    void check_head_position();
+    std:: vector<sf::CircleShape> head;
+    std:: vector<sf::Vector2f> cur_coords;
+    Direction dir;
+    float vec_x, vec_y;
     int height, width;
     sf::RenderWindow& window;
 };

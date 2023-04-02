@@ -1,5 +1,6 @@
 #include "SnakeClass.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #define INIT_SIZE 1
 #define RADIUS 10
@@ -29,22 +30,31 @@ Snake:: Snake(int h, int w, sf::RenderWindow& win) : height(h), width(w), window
     init_head();
 }
 
-float Snake:: get_motion(int left, int right) {
+float Snake:: get_motion_value(int left, int right) {
     if (left > right) return SPEED;
     if (left == right) return 0.0;
     return -SPEED;
 }
 
-void Snake:: movement() {
-    head[0].move(vec_x, vec_y);
+
+sf::Vector2f Snake:: get_motion_vector(size_t idx) {
+    float move_x = get_motion_value(cur_coords[idx - 1].x, head[idx].getPosition().x);
+    float move_y = get_motion_value(cur_coords[idx - 1].y, head[idx].getPosition().y);
+    return sf::Vector2f(move_x, move_y);
+}
+
+void Snake:: check_head_position() {
     if (head[0].getPosition().y < 40 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, width - RADIUS * 2 - 20);
     if (head[0].getPosition().y > width - 20 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, 40);
     if (head[0].getPosition().x < 0 && vec_x < 0) head[0].setPosition(height - RADIUS, head[0].getPosition().y);
     if (head[0].getPosition().x > height - 20 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
+}
+
+void Snake:: movement() {
+    head[0].move(vec_x, vec_y);
+    check_head_position();
     for (size_t i = 1; i < head.size(); i++) {
-        int move_x = get_motion(cur_coords[i - 1].x, head[i].getPosition().x);
-        int move_y = get_motion(cur_coords[i - 1].y, head[i].getPosition().y);
-        head[i].move(move_x, move_y);
+        head[i].move(get_motion_vector(i));
         if (std:: fabs(cur_coords[i - 1].y - head[i].getPosition().y) > 20 &&
             head[i].getPosition().y) head[i].setPosition(head[i].getPosition().x, cur_coords[i - 1].y);
         if (std:: fabs(cur_coords[i - 1].x - head[i].getPosition().x) > 20 &&
