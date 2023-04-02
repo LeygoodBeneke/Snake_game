@@ -50,16 +50,19 @@ void Snake:: check_head_position() {
     if (head[0].getPosition().x > height - 20 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
 }
 
+void Snake:: body_movement(int idx) {
+    head[idx].move(get_motion_vector(idx));
+    if (std:: fabs(cur_coords[idx - 1].y - head[idx].getPosition().y) > 20 &&
+        head[idx].getPosition().y) head[idx].setPosition(head[idx].getPosition().x, cur_coords[idx - 1].y);
+    if (std:: fabs(cur_coords[idx - 1].x - head[idx].getPosition().x) > 20 &&
+        head[idx].getPosition().x) head[idx].setPosition(cur_coords[idx - 1].x, head[idx].getPosition().y);
+}
+
 void Snake:: movement() {
     head[0].move(vec_x, vec_y);
     check_head_position();
-    for (size_t i = 1; i < head.size(); i++) {
-        head[i].move(get_motion_vector(i));
-        if (std:: fabs(cur_coords[i - 1].y - head[i].getPosition().y) > 20 &&
-            head[i].getPosition().y) head[i].setPosition(head[i].getPosition().x, cur_coords[i - 1].y);
-        if (std:: fabs(cur_coords[i - 1].x - head[i].getPosition().x) > 20 &&
-            head[i].getPosition().x) head[i].setPosition(cur_coords[i - 1].x, head[i].getPosition().y);
-    }
+    for (size_t i = 1; i < head.size(); i++)
+        body_movement(i);
 }
 
 void Snake:: update_cur_coords() {

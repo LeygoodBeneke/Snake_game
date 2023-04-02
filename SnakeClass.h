@@ -28,6 +28,7 @@ private:
     float get_motion_value(int left, int right);
     sf::Vector2f get_motion_vector(size_t idx);
     void check_head_position();
+    void body_movement(int idx);
     std:: vector<sf::CircleShape> head;
     std:: vector<sf::Vector2f> cur_coords;
     Direction dir;

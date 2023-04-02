@@ -15,12 +15,10 @@ void GameScene:: logic() {
         snake.logic(score);
         apple.logic(snake, score);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         isPaused = true;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         isPaused = false;
-    }
     drawScene();
 }
 
