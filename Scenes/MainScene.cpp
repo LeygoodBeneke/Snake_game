@@ -9,9 +9,7 @@ void MainScene:: drawScene() {
 }
 
 bool MainScene:: logic() {
-    if (exit_button.isPressed()) {
-        window.close();
-    }
+    if (exit_button.isPressed()) window.close();
     return play_button.isPressed();
 }
 

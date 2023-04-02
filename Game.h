@@ -1,7 +1,7 @@
 #include "Scenes/MainScene.h"
 #include "Scenes/GameScene.h"
-#define WIDTH 400
-#define HEIGHT 400
+#define WIDTH 800
+#define HEIGHT 600
 
 class Game {
 public:

@@ -19,8 +19,7 @@ void Snake:: add_body() {
 }
 
 void Snake:: init_head() {
-    for (int i = 0; i < INIT_SIZE; i++)
-        add_body();
+    for (int i = 0; i < INIT_SIZE; i++) add_body();
 }
 
 Snake:: Snake(int h, int w, sf::RenderWindow& win) : height(h), width(w), window(win) {
@@ -51,17 +50,16 @@ void Snake:: check_head_position() {
 
 void Snake:: body_movement(int idx) {
     head[idx].move(get_motion_vector(idx));
-    if (std:: fabs(cur_coords[idx - 1].y - head[idx].getPosition().y) > RADIUS * 2 &&
-        head[idx].getPosition().y) head[idx].setPosition(head[idx].getPosition().x, cur_coords[idx - 1].y);
-    if (std:: fabs(cur_coords[idx - 1].x - head[idx].getPosition().x) > RADIUS * 2 &&
-        head[idx].getPosition().x) head[idx].setPosition(cur_coords[idx - 1].x, head[idx].getPosition().y);
+    if (std:: fabs(cur_coords[idx - 1].y - head[idx].getPosition().y) > RADIUS * 2)
+        head[idx].setPosition(head[idx].getPosition().x, cur_coords[idx - 1].y);
+    if (std:: fabs(cur_coords[idx - 1].x - head[idx].getPosition().x) > RADIUS * 2)
+        head[idx].setPosition(cur_coords[idx - 1].x, head[idx].getPosition().y);
 }
 
 void Snake:: movement() {
     head[0].move(vec_x, vec_y);
     check_head_position();
-    for (size_t i = 1; i < head.size(); i++)
-        body_movement(i);
+    for (size_t i = 1; i < head.size(); i++) body_movement(i);
 }
 
 void Snake:: update_cur_coords() {
@@ -93,14 +91,10 @@ Snake:: ~Snake() {}
 
 
 void Snake:: set_direction() {
-    if (dir == sf::Keyboard::Up || dir == sf::Keyboard::Down) {
-        vec_y = SPEED * (dir == sf::Keyboard::Up ? -1 : 1);
-        vec_x = 0.00f;
-    }
-    if (dir == sf::Keyboard::Left || dir == sf::Keyboard::Right) {
-        vec_y = 0.00f;
-        vec_x = SPEED * (dir == sf::Keyboard::Left ? -1 : 1);
-    }
+    vec_x = SPEED * (dir == sf::Keyboard::Left ? -1 : 1);
+    vec_y = SPEED * (dir == sf::Keyboard::Up ? -1 : 1);
+    if (dir == sf::Keyboard::Up || dir == sf::Keyboard::Down) vec_x = 0.00f;
+    if (dir == sf::Keyboard::Left || dir == sf::Keyboard::Right) vec_y = 0.00f;
 }
 
 bool Snake:: is_int_coords() {
@@ -109,9 +103,7 @@ bool Snake:: is_int_coords() {
            fabs(int(y) - y) <= 0.01f && int(y) % (RADIUS * 2) == 0;
 }
 
-void Snake:: set_keyboard_key(sf::Keyboard::Key key) {
-    dir = key;
-}
+void Snake:: set_keyboard_key(sf::Keyboard::Key key) { dir = key; }
 
 sf:: Vector2f Snake:: get_head_pos() {
     return head.front().getPosition();
