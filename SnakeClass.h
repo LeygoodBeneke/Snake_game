@@ -1,13 +1,6 @@
 #include "Score.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 
-enum Direction {
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN,
-    DEFAULT
-};
 
 class Snake {
 public:
@@ -15,12 +8,12 @@ public:
     void logic(Score &score);
     sf:: Vector2f get_head_pos();
     void add_body();
+    void set_keyboard_key(sf::Keyboard::Key key);
     Snake(int h, int w, sf::RenderWindow& win);
     ~Snake();
 private:
     void set_direction();
     bool is_int_coords();
-    enum Direction check_keyboard_key();
     void init_head();
     void movement();
     void update_cur_coords();
@@ -31,7 +24,7 @@ private:
     void body_movement(int idx);
     std:: vector<sf::CircleShape> head;
     std:: vector<sf::Vector2f> cur_coords;
-    Direction dir;
+    sf::Keyboard::Key dir;
     float vec_x, vec_y;
     int height, width;
     sf::RenderWindow& window;

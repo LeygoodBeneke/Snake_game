@@ -8,9 +8,12 @@ Game::Game() : window(sf::VideoMode(HEIGHT, WIDTH), "SNAKE"),
 
 void Game:: event_logic() {
     sf::Event event;
-    while (window.pollEvent(event))
+    while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window.close();
+        if (event.type == sf::Event::KeyPressed)
+            game_scene.event_logic(event.key.code);
+    }
 }
 
 void Game:: logic() {

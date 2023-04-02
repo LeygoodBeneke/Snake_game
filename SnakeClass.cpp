@@ -1,6 +1,7 @@
 #include "SnakeClass.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 #define INIT_SIZE 10
 #define SPEED 10.0f
@@ -25,7 +26,7 @@ void Snake:: init_head() {
 Snake:: Snake(int h, int w, sf::RenderWindow& win) : height(h), width(w), window(win) {
     vec_x = SPEED;
     vec_y = 0.00f;
-    dir = DEFAULT;
+    dir = sf::Keyboard::Right;
     init_head();
 }
 
@@ -80,7 +81,6 @@ void Snake:: collision(Score &score) {
 }
 
 void Snake:: logic(Score &score) {
-    dir = check_keyboard_key();
     if (is_int_coords()) {
         set_direction();
         update_cur_coords();
@@ -93,13 +93,13 @@ Snake:: ~Snake() {}
 
 
 void Snake:: set_direction() {
-    if (dir == Direction::UP || dir == Direction::DOWN) {
-        vec_y = SPEED * (dir == Direction::UP ? -1 : 1);
+    if (dir == sf::Keyboard::Up || dir == sf::Keyboard::Down) {
+        vec_y = SPEED * (dir == sf::Keyboard::Up ? -1 : 1);
         vec_x = 0.00f;
     }
-    if (dir == Direction::LEFT || dir == Direction::RIGHT) {
+    if (dir == sf::Keyboard::Left || dir == sf::Keyboard::Right) {
         vec_y = 0.00f;
-        vec_x = SPEED * (dir == Direction::LEFT ? -1 : 1);
+        vec_x = SPEED * (dir == sf::Keyboard::Left ? -1 : 1);
     }
 }
 
@@ -109,16 +109,8 @@ bool Snake:: is_int_coords() {
            fabs(int(y) - y) <= 0.01f && int(y) % (RADIUS * 2) == 0;
 }
 
-enum Direction Snake:: check_keyboard_key() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        return Direction::LEFT;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        return Direction::RIGHT;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        return Direction::UP;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        return Direction::DOWN;
-    return dir;
+void Snake:: set_keyboard_key(sf::Keyboard::Key key) {
+    dir = key;
 }
 
 sf:: Vector2f Snake:: get_head_pos() {

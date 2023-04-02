@@ -9,6 +9,7 @@ public:
     void drawScene();
     void logic();
     GameScene(int h, int w, sf::RenderWindow& win);
+    void event_logic(sf::Keyboard::Key key);
 
 private:
     int height, width;
@@ -18,4 +19,5 @@ private:
     Score score;
     Map map;
     bool isPaused = false;
+    sf::Event event;
 };
