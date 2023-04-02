@@ -29,18 +29,26 @@ Snake:: Snake(int h, int w, sf::RenderWindow& win) : height(h), width(w), window
     init_head();
 }
 
+float Snake:: get_motion(int left, int right) {
+    if (left > right) return SPEED;
+    if (left == right) return 0.0;
+    return -SPEED;
+}
 
 void Snake:: movement() {
     head[0].move(vec_x, vec_y);
-    if (head[0].getPosition().y < 60 && vec_y < 0) head[0].move(0, width - RADIUS * 2 - 60);
-    if (head[0].getPosition().y > width - 40) head[0].setPosition(head[0].getPosition().x, 40);
+    if (head[0].getPosition().y < 40 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, width - RADIUS * 2 - 20);
+    if (head[0].getPosition().y > width - 20 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, 40);
+    if (head[0].getPosition().x < 0 && vec_x < 0) head[0].setPosition(height - RADIUS, head[0].getPosition().y);
+    if (head[0].getPosition().x > height - 20 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
     for (size_t i = 1; i < head.size(); i++) {
-        if (int(cur_coords[i - 1].x) > int(head[i].getPosition().x)) head[i].move(SPEED, 0);
-        else if (int(cur_coords[i - 1].x) < int(head[i].getPosition().x)) head[i].move(-SPEED, 0);
-        else if (int(cur_coords[i - 1].y) > int(head[i].getPosition().y)) head[i].move(0, SPEED);
-        else if (int(cur_coords[i - 1].y) < int(head[i].getPosition().y)) head[i].move(0, -SPEED);
-
-        if (std:: fabs(cur_coords[i - 1].y - head[i].getPosition().y) >= 40) head[i].move(0, cur_coords[i - 1].y - 50);
+        int move_x = get_motion(cur_coords[i - 1].x, head[i].getPosition().x);
+        int move_y = get_motion(cur_coords[i - 1].y, head[i].getPosition().y);
+        head[i].move(move_x, move_y);
+        if (std:: fabs(cur_coords[i - 1].y - head[i].getPosition().y) > 20 &&
+            head[i].getPosition().y) head[i].setPosition(head[i].getPosition().x, cur_coords[i - 1].y);
+        if (std:: fabs(cur_coords[i - 1].x - head[i].getPosition().x) > 20 &&
+            head[i].getPosition().x) head[i].setPosition(cur_coords[i - 1].x, head[i].getPosition().y);
     }
 }
 

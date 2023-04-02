@@ -4,10 +4,10 @@
 
 
 void GameScene:: drawScene() {
+    snake.draw();
     score.draw(window);
     map.draw(window);
     apple.draw(window);
-    snake.draw();
 }
 
 void GameScene:: logic() {

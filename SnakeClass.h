@@ -29,6 +29,7 @@ private:
     void movement();
     void update_cur_coords();
     void collision(Score &score);
+    float get_motion(int left, int right);
     int height, width;
     sf::RenderWindow& window;
 };

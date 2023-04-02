@@ -13,5 +13,5 @@ public:
 private:
     int height, width;
     sf::RenderWindow &window;
-    Button play_button, exit_button;
+    Button play_button, settings_button, exit_button;
 };
