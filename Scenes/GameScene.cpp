@@ -2,7 +2,6 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-
 void GameScene:: drawScene() {
     snake.draw();
     score.draw(window);
@@ -26,8 +25,8 @@ void GameScene:: event_logic(sf::Keyboard::Key key) {
     snake.set_keyboard_key(key);
 }
 
-GameScene:: GameScene(int h, int w, sf::RenderWindow& win) 
-    : height(h), width(w), window(win), snake(h, w, win), apple(h, w), score(h, w), map(h / (RADIUS * 2), w / (RADIUS * 2) - 2) {
+GameScene:: GameScene(int h, int w, sf::RenderWindow& win, int rad) 
+    : height(h), width(w), window(win), snake(h, w, win), apple(h, w), score(h, w), map(h / (rad * 2), w / (rad * 2) - 2) {
         map.init();
     }
 

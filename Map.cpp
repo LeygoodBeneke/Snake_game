@@ -1,7 +1,6 @@
 #include "Map.h"
-#define RADIUS 20
 
-Map:: Map(int n, int m) : map(n, std:: vector<int>(m)) {}
+Map:: Map(int n, int m, int rad) : map(n, std:: vector<int>(m)), radius(rad) {}
 
 void Map:: init() {
     int m = map[0].size();
@@ -20,9 +19,8 @@ void Map:: draw(sf:: RenderWindow &window) {
         for (size_t j = 0; j < map[i].size(); j++) {
             if (map[i][j] == 1) {
                 sf::RectangleShape rect;
-                sf::Vector2f vec = {RADIUS * 2, RADIUS * 2};
-                rect.setSize(vec);
-                rect.move(i * (RADIUS * 2), j * (RADIUS * 2) + 4 * (RADIUS));
+                rect.setSize(sf::Vector2f(radius * 2, radius * 2));
+                rect.move(i * (radius * 2), j * (radius * 2) + 4 * (radius));
                 window.draw(rect);
             }
         }
