@@ -5,7 +5,7 @@
 
 class Score {
 public:
-    void draw(sf::RenderWindow &window) {
+    void draw() {
         text.setString("Score: " + std::to_string(score));
         window.draw(text);
     }

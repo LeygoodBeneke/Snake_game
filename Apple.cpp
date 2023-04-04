@@ -1,6 +1,6 @@
 #include "Apple.h"
 
-void Apple:: draw(sf:: RenderWindow &window) {
+void Apple:: draw() {
     window.draw(apple);
 }
 

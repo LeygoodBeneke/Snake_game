@@ -2,11 +2,12 @@
 
 class Map {
 public:
-    Map(int n, int m, int rad=20);
+    Map(sf::RenderWindow& win, int rad=20);
     void init();
-    void draw(sf:: RenderWindow &window);
+    void draw();
 
 private:
     std:: vector<std:: vector<int>> map;
+    sf::RenderWindow& window;
     int radius;
 };

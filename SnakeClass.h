@@ -14,7 +14,6 @@ public:
 private:
     void set_direction();
     bool is_int_coords();
-    void init_head();
     void movement();
     void update_cur_coords();
     void collision(Score &score);

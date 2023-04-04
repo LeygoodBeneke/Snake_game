@@ -1,6 +1,8 @@
 #include "Map.h"
 
-Map:: Map(int n, int m, int rad) : map(n, std:: vector<int>(m)), radius(rad) {}
+Map:: Map(sf::RenderWindow& win, int rad)
+    : map(win.getSize().x / (rad * 2) , std:: vector<int>(win.getSize().y / (rad * 2) - 2)), radius(rad),
+      window(win) {}
 
 void Map:: init() {
     int m = map[0].size();
@@ -14,7 +16,7 @@ void Map:: init() {
     }
 }
 
-void Map:: draw(sf:: RenderWindow &window) {
+void Map:: draw() {
     for (size_t i = 0; i < map.size(); i++) {
         for (size_t j = 0; j < map[i].size(); j++) {
             if (map[i][j] == 1) {

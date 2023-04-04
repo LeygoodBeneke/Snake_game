@@ -3,8 +3,6 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#define INIT_SIZE 10
-
 void Snake:: draw() {
     for (size_t i = 0; i < head.size(); i++) window.draw(head[i]);
 }
@@ -17,16 +15,12 @@ void Snake:: add_body() {
     else head.back().setPosition(head[head.size() - 2].getPosition().x, head[head.size() - 2].getPosition().y);
 }
 
-void Snake:: init_head() {
-    for (int i = 0; i < INIT_SIZE; i++) add_body();
-}
-
 Snake:: Snake(sf::RenderWindow& win, int rad, float spd)
     : window(win), radius(rad), speed(spd) {
     vec_x = speed;
     vec_y = 0.00f;
     dir = sf::Keyboard::Right;
-    init_head();
+    add_body();
 }
 
 float Snake:: get_motion_value(int left, int right) {

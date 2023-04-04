@@ -4,9 +4,9 @@
 
 void GameScene:: drawScene() {
     snake.draw();
-    score.draw(window);
-    map.draw(window);
-    apple.draw(window);
+    score.draw();
+    map.draw();
+    apple.draw();
 }
 
 void GameScene:: logic() {
@@ -26,11 +26,7 @@ void GameScene:: event_logic(sf::Keyboard::Key key) {
 }
 
 GameScene:: GameScene(sf::RenderWindow& win, int rad) 
-    : window(win),
-      snake(win),
-      apple(window),
-      score(window),
-      map(window.getSize().x / (rad * 2), window.getSize().y / (rad * 2) - 2) {
+    : window(win), snake(win), apple(window), score(window), map(window) {
         map.init();
-    }
+}
 
