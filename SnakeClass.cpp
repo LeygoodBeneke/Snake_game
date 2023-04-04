@@ -85,10 +85,16 @@ Snake:: ~Snake() {}
 
 
 void Snake:: set_direction() {
-    vec_x = speed * (dir == sf::Keyboard::Left ? -1 : 1);
-    vec_y = speed * (dir == sf::Keyboard::Up ? -1 : 1);
-    if (dir == sf::Keyboard::Up || dir == sf::Keyboard::Down) vec_x = 0.00f;
-    if (dir == sf::Keyboard::Left || dir == sf::Keyboard::Right) vec_y = 0.00f;
+    if (dir == sf::Keyboard::Up || dir == sf::Keyboard::Down) { 
+        if (head[0].getPosition().x < radius * 2 || head[0].getPosition().x > window.getSize().x - radius * 4) return;
+        vec_x = 0.f;
+        vec_y = speed * (dir == sf::Keyboard::Up ? -1 : 1);
+    }
+    if (dir == sf::Keyboard::Left || dir == sf::Keyboard::Right) { 
+        if (head[0].getPosition().y < radius * 6 || head[0].getPosition().y > window.getSize().y - radius * 4) return;
+        vec_y = 0.f;
+        vec_x = speed * (dir == sf::Keyboard::Left ? -1 : 1);
+    }
 }
 
 bool Snake:: is_int_coords() {

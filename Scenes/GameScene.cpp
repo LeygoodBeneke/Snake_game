@@ -4,8 +4,8 @@
 
 void GameScene:: drawScene() {
     snake.draw();
-    score.draw();
     map.draw();
+    score.draw();
     apple.draw();
 }
 
