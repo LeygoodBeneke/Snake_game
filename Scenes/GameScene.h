@@ -8,11 +8,10 @@ class GameScene {
 public:
     void drawScene();
     void logic();
-    GameScene(int h, int w, sf::RenderWindow& win, int rad=20);
+    GameScene(sf::RenderWindow& win, int rad=20);
     void event_logic(sf::Keyboard::Key key);
 
 private:
-    int height, width;
     sf::RenderWindow &window;
     Snake snake;
     Apple apple;

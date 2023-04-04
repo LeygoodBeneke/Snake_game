@@ -9,7 +9,7 @@ public:
     sf:: Vector2f get_head_pos();
     void add_body();
     void set_keyboard_key(sf::Keyboard::Key key);
-    Snake(int h, int w, sf::RenderWindow& win, int rad=20, float spd=10.0f);
+    Snake(sf::RenderWindow& win, int rad=20, float spd=10.0f);
     ~Snake();
 private:
     void set_direction();
@@ -26,7 +26,6 @@ private:
     std:: vector<sf::Vector2f> cur_coords;
     sf::Keyboard::Key dir;
     float vec_x, vec_y;
-    int height, width;
     sf::RenderWindow& window;
     int radius;
     float speed;

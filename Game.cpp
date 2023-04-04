@@ -1,8 +1,8 @@
 #include "Game.h"
 
 Game::Game() : window(sf::VideoMode(HEIGHT, WIDTH), "SNAKE"),
-         main_scene(HEIGHT, WIDTH, window),
-         game_scene(HEIGHT, WIDTH, window) {
+         main_scene(window),
+         game_scene(window) {
     window.setVerticalSyncEnabled(true);
 }
 

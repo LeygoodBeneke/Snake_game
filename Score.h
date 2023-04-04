@@ -10,11 +10,11 @@ public:
         window.draw(text);
     }
 
-    Score(int height, int width) : font() {
+    Score(sf::RenderWindow& win) : font(), window(win) {
         font.loadFromFile("fonts/Hack-Regular.ttf");
         text = sf:: Text("Scroe: 1", font, 22);
         text.setPosition(30, 30);
-        text.setPosition(height / 2.0f - 40, width * 0 + 5);
+        text.setPosition(window.getSize().x / 2.0f - 40, window.getSize().y * 0 + 5);
         score = 1;
     }
 
@@ -23,5 +23,6 @@ public:
 private:
     sf::Text text;
     sf::Font font;
-    int score, height, width;
+    int score;
+    sf::RenderWindow& window;
 };

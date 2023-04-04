@@ -21,8 +21,8 @@ void Snake:: init_head() {
     for (int i = 0; i < INIT_SIZE; i++) add_body();
 }
 
-Snake:: Snake(int h, int w, sf::RenderWindow& win, int rad, float spd)
-    : height(h), width(w), window(win), radius(rad), speed(spd) {
+Snake:: Snake(sf::RenderWindow& win, int rad, float spd)
+    : window(win), radius(rad), speed(spd) {
     vec_x = speed;
     vec_y = 0.00f;
     dir = sf::Keyboard::Right;
@@ -42,10 +42,10 @@ sf::Vector2f Snake:: get_motion_vector(size_t idx) {
 }
 
 void Snake:: check_head_position() {
-    if (head[0].getPosition().y < radius * 4 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, width - radius * 4);
-    if (head[0].getPosition().y > width - radius * 2 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, radius * 4);
-    if (head[0].getPosition().x < 0 && vec_x < 0) head[0].setPosition(height - radius, head[0].getPosition().y);
-    if (head[0].getPosition().x > height - radius * 2 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
+    if (head[0].getPosition().y < radius * 4 && vec_y < 0) head[0].setPosition(head[0].getPosition().x, window.getSize().y - radius * 4);
+    if (head[0].getPosition().y > window.getSize().y - radius * 2 && vec_y > 0) head[0].setPosition(head[0].getPosition().x, radius * 4);
+    if (head[0].getPosition().x < 0 && vec_x < 0) head[0].setPosition(window.getSize().x - radius, head[0].getPosition().y);
+    if (head[0].getPosition().x > window.getSize().x - radius * 2 && vec_x > 0) head[0].setPosition(0, head[0].getPosition().y);
 }
 
 void Snake:: body_movement(int idx) {

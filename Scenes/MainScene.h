@@ -8,10 +8,9 @@ class MainScene {
 public:
     void drawScene();
     bool logic();
-    MainScene(int h, int w, sf::RenderWindow& win);
+    MainScene(sf::RenderWindow& win);
 
 private:
-    int height, width;
     sf::RenderWindow &window;
     Button play_button, settings_button, exit_button;
 };

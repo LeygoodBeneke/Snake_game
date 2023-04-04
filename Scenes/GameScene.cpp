@@ -25,8 +25,12 @@ void GameScene:: event_logic(sf::Keyboard::Key key) {
     snake.set_keyboard_key(key);
 }
 
-GameScene:: GameScene(int h, int w, sf::RenderWindow& win, int rad) 
-    : height(h), width(w), window(win), snake(h, w, win), apple(h, w), score(h, w), map(h / (rad * 2), w / (rad * 2) - 2) {
+GameScene:: GameScene(sf::RenderWindow& win, int rad) 
+    : window(win),
+      snake(win),
+      apple(window),
+      score(window),
+      map(window.getSize().x / (rad * 2), window.getSize().y / (rad * 2) - 2) {
         map.init();
     }
 
