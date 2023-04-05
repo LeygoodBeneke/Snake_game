@@ -1,6 +1,4 @@
 #include "Score.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-
 
 class Snake {
 public:
@@ -9,7 +7,7 @@ public:
     sf:: Vector2f get_head_pos();
     void add_body();
     void set_keyboard_key(sf::Keyboard::Key key);
-    Snake(sf::RenderWindow& win, int rad=20, float spd=10.0f);
+    Snake(sf::RenderWindow& win, int rad=20, float spd=5.0f);
     ~Snake();
 private:
     void set_direction();
@@ -21,6 +19,8 @@ private:
     sf::Vector2f get_motion_vector(size_t idx);
     void check_head_position();
     void body_movement(int idx);
+    
+    std:: vector<std:: vector<bool>> visit;
     std:: vector<sf::CircleShape> head;
     std:: vector<sf::Vector2f> cur_coords;
     sf::Keyboard::Key dir;

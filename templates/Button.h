@@ -26,6 +26,10 @@ public:
         return false;
     }
 
+    sf::Vector2f getScale() {
+        return sprite.getScale();
+    }
+
 
 private:
     void hover() {

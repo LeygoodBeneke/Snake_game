@@ -20,6 +20,7 @@ void Apple:: logic(Snake& snake, Score& score) {
 }
 
 Apple:: Apple(sf::RenderWindow& win, int rad) : apple(rad), window(win), radius(rad) {
+    srand(time(0));
     apple.setFillColor(sf::Color::Red);
     apple.setPosition(4 * radius, 6 * radius);
 }

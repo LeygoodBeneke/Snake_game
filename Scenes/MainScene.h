@@ -1,8 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
-
-#include "../templates/Button.h"
+#include "GameScene.h"
 
 class MainScene {
 public:

@@ -1,6 +1,4 @@
 #include "MainScene.h"
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/System/Vector2.hpp>
 
 void MainScene:: drawScene() {
     play_button.draw();

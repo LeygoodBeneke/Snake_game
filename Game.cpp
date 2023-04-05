@@ -20,7 +20,7 @@ void Game:: logic() {
     bool flag = false;
     while (window.isOpen()) {
         event_logic();
-        if (flag) game_scene.logic();
+        if (flag) flag = game_scene.logic();
         else {
             main_scene.drawScene();
             flag = main_scene.logic();
